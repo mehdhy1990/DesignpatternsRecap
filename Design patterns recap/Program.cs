@@ -1,4 +1,5 @@
-﻿using Design_patterns_recap.Singleton;
+﻿using Design_patterns_recap.FactoryMethod;
+using Design_patterns_recap.Singleton;
 
 namespace Design_patterns_recap;
 
@@ -6,16 +7,17 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Title = "Design patterns recap";
-        var instance1 = Logger.Instance;
-        var instance2 = Logger.Instance;
-
-        if (instance1 == instance2 && instance2 == Logger.Instance)
+        Console.Title = "Factory Method";
+        var factories = new List<DiscountFactory>
         {
-            Console.WriteLine("instances are the same");
+            new CodeDiscountFactory(Guid.NewGuid()),
+            new CountryDiscountFactory("BE")
+        };
+        foreach (var factory in factories)
+        {
+           var discountService = factory.CreateDiscountService(); 
+           Console.WriteLine($"the percentage {discountService.DiscountPercentage} coming from {discountService}");
         }
-        instance1?.Log($"message from {nameof(instance1)}");
-        instance2?.Log($"message from {nameof(instance2)}");
-        Logger.Instance?.Log($"message from {nameof(Logger)}");
+        
     }
 }
