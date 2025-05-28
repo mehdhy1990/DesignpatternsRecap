@@ -32,7 +32,7 @@ public class Car
 
 public abstract class CarBuilder
 {
-    public Car Car { get;private set; }
+    public Car Car { get; private set; }
 
     public CarBuilder(string carType)
     {
@@ -41,4 +41,54 @@ public abstract class CarBuilder
 
     public abstract void BuildEngine();
     public abstract void BuildFrame();
+}
+
+public class MiniBuilder : CarBuilder
+{
+    public MiniBuilder() : base("Mini")
+    {
+    }
+
+    public override void BuildEngine()
+    {
+        Car.AddPart("not a a V8");
+    }
+
+    public override void BuildFrame()
+    {
+        Car.AddPart("3-door with stripes");
+    }
+}
+
+public class BMWBuilder : CarBuilder
+{
+    public BMWBuilder() : base("BMW")
+    {
+    }
+
+    public override void BuildEngine()
+    {
+        Car.AddPart("'a fancy V8 Engine'");
+    }
+
+    public override void BuildFrame()
+    {
+        Car.AddPart("'5-door with metallic finish'");
+    }
+}
+
+public class Garage
+{
+    private CarBuilder? _builder;
+
+    public Garage()
+    {
+    }
+
+    public void Construct(CarBuilder carBuilder)
+    {
+        _builder = carBuilder;
+        _builder.BuildEngine();
+        _builder.BuildFrame();
+    }
 }

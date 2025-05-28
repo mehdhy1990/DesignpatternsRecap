@@ -1,4 +1,5 @@
 ﻿using Design_patterns_recap.AbstractFactory;
+using Design_patterns_recap.BuilderPattern;
 using Design_patterns_recap.FactoryMethod;
 using Design_patterns_recap.Singleton;
 
@@ -8,14 +9,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Title = "Abstract Factory Method";
-        var belguimShoppingCartPurchase = new BelgiumShoppingCartPurchaseFactory();
-        var ShoppingCartForBelgium = new ShoppingCart(belguimShoppingCartPurchase);
-        ShoppingCartForBelgium.CalculateCost();
+        Console.Title = "Design patterns Builder";
+        var garage = new Garage();
+        var miniBuilder = new MiniBuilder();
+        var bmwBuilder = new BMWBuilder();
+        garage.Construct(miniBuilder);
+        Console.Write(miniBuilder.Car.ToString());
         
-        var FranceShoppingCartPurchase = new FranceShoppingCartPurchaseFactory();
-        var ShoppingCartForFrance = new ShoppingCart(FranceShoppingCartPurchase);
-        ShoppingCartForFrance.CalculateCost();
-
+        garage.Construct(bmwBuilder);
+        Console.Write(bmwBuilder.Car.ToString());
     }
 }
