@@ -1,6 +1,7 @@
 ﻿using Design_patterns_recap.AbstractFactory;
 using Design_patterns_recap.BuilderPattern;
 using Design_patterns_recap.FactoryMethod;
+using Design_patterns_recap.Prototype;
 using Design_patterns_recap.Singleton;
 
 namespace Design_patterns_recap;
@@ -9,14 +10,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Title = "Design patterns Builder";
-        var garage = new Garage();
-        var miniBuilder = new MiniBuilder();
-        var bmwBuilder = new BMWBuilder();
-        garage.Construct(miniBuilder);
-        Console.Write(miniBuilder.Car.ToString());
+        Console.Title = "Design patterns Prototype";
+        var manager = new Manager("Cindy");
+        var managerClone = (Manager)manager.Clone();
+        Console.WriteLine($"Manager was cloned: {managerClone.Name}");
         
-        garage.Construct(bmwBuilder);
-        Console.Write(bmwBuilder.Car.ToString());
+        var employee = new Eemployee("Kevin",manager);
+        var employeeClone = (Eemployee)employee.Clone();
+        Console.WriteLine($"Employee was cloned: {employeeClone.Name}, with manager: {employeeClone.Manager.Name}");
     }
 }
