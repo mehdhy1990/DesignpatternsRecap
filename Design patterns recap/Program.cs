@@ -1,5 +1,6 @@
 ﻿using Design_patterns_recap.AbstractFactory;
 using Design_patterns_recap.AdapterPattern;
+using Design_patterns_recap.BridgePattern;
 using Design_patterns_recap.BuilderPattern;
 using Design_patterns_recap.FactoryMethod;
 using Design_patterns_recap.Prototype;
@@ -11,10 +12,16 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Title = "Adapter";
-        ICityAdapter adapter = new CityAdapter();
-        var city = adapter.GetCity();
+        Console.Title = "Bridge";
+        var noCoupon = new NoCoupon();
+        var oneEuroCoupon = new OneEuroDiscount();
+        var twoEuroCoupon = new TwoEuroDiscount();
+
+        var meatBasedMenu = new MeatBaesedMenu(noCoupon);
+        Console.WriteLine($"Meat based menu: {meatBasedMenu.CalculatePrice()} euro");
         
-        Console.WriteLine($"city name is: {city.FullName}, and population is {city.Inhabitants}");
+        
+        var vegetarionMenu = new VegetarianMenu(oneEuroCoupon);
+         Console.WriteLine($"Vegetarian menu: {vegetarionMenu.CalculatePrice()} euro");
     }
 }
